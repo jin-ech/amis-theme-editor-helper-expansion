@@ -1,0 +1,43 @@
+{
+  "name": "amis-theme-editor-helper-expansion",
+  "version": "1.0.0",
+  "description": "amis主题编辑器通用方法-扩展",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vite --config ./vite.config.ts",
+    "build": "npm run clean-dist && NODE_ENV=production rollup -c ",
+    "clean-dist": "rimraf lib/* esm/*",
+    "i18n:update": "echo \"none\"",
+    "i18n:translate": "echo \"none\"",
+    "i18n:merge": "echo \"none\""
+  },
+  "keywords": [
+    "amis",
+    "theme-editor-helper-expansion"
+  ],
+  "author": "jinech",
+  "license": "ISC",
+  "files": [
+    "lib",
+    "esm"
+  ],
+  "lint-staged": {
+    "{src,scss,examples}/**/**/*.{js,jsx,ts,tsx,scss,json}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.2",
+    "rollup": "^2.73.0",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-license": "^2.7.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.4"
+  }
+}
