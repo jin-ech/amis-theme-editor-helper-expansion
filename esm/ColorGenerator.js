@@ -95,6 +95,7 @@ var ColorGenerator = /** @class */ (function () {
         configurable: true,
         writable: true,
         value: function () {
+            console.log('in light dervied color');
             const rgb = ColorGenerator.hexToRgb(this.color);
             const hsv = ColorGenerator.rgbToHsv(rgb);
             const baseColor = { hex: this.color, hsv, rgb };
@@ -194,9 +195,16 @@ var ColorGenerator = /** @class */ (function () {
             };
             const deepDerivedColor = lightDerivedColor.map((color, index) => {
                 const [_h, _s, _v] = color.hsv;
+                // 一阶色值
+                if (index === 0) {
+                    return color;
+                }
                 // 深色
                 if (index < 5) {
-                    return { ...color, hsv: getHsv([_h, _s, _v + 5]) }
+                    const hsv = getHsv([_h, _s, _v + 5]);
+                    const rgb = ColorGenerator.hsvToRgb(hsv);
+                    const hex = ColorGenerator.rgbToHex(rgb);
+                    return { hsv, rgb, hex };
                 }
                 // 基准色
                 if (index === 5) {
@@ -205,11 +213,16 @@ var ColorGenerator = /** @class */ (function () {
                     // 亮色六阶颜色
                     const hsv5 = lightDerivedColor[5].hsv;
                     // 计算最新的基准色
-                    const hsv = [_h, Math.floor((hsv4[1] + hsv5[1]) / 2), _v];
-                    return { ...color, hsv: getHsv(hsv) };
+                    const hsv = getHsv([_h, Math.floor((hsv4[1] + hsv5[1]) / 2), _v]);
+                    const rgb = ColorGenerator.hsvToRgb(hsv);
+                    const hex = ColorGenerator.rgbToHex(rgb);
+                    return { hsv, rgb, hex };
                 }
-                // 深色
-                return { ...color, hsv: getHsv([_h, _s - 5, _v]) };
+                // 浅色
+                const hsv = getHsv([_h, _s - 5, _v]);
+                const rgb = ColorGenerator.hsvToRgb(hsv);
+                const hex = ColorGenerator.rgbToHex(rgb);
+                return { hsv, rgb, hex };
             });
             return deepDerivedColor;
         }

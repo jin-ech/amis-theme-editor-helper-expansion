@@ -1,6 +1,6 @@
 {
   "name": "amis-theme-editor-helper-expansion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "amis主题编辑器通用方法-扩展",
   "main": "lib/index.js",
   "module": "esm/index.js",
